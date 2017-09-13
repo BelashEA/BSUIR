@@ -1,29 +1,41 @@
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class lab1 {
     public static void main(String args[ ])
     {
-        //zad1(arrayFirst());
-        //zad2(arraySecond());
-        //zad3(arrayFirst());
+        try {
+            //zad1(arrayFirst());
 
-        zad5(arraySecond());
+            //zad3(arrayFirst());
+        }catch (Exception e){
+            System.out.println("Необходимо вводить только числа больше 0. Попробуйте еще раз.");
+        }
+
+        try {
+            //zad2(arraySecond());
+
+            //zad5(arraySecond());
+            zad6(arraySecond());
+        } catch (Exception e) {
+            System.out.println("Необходимо вводить только числа больше 0. Попробуйте еще раз.");
+        }
 
     }
-    public static int[] arrayFirst(){
+    public static int[] arrayFirst() throws Exception{
         System.out.println( "Input number from keyboard" );
         Scanner sc = new Scanner(System.in);
         int[] array = new int[sc.nextInt()];
 
         for (int i = 0; i < array.length; i++) {
             array[i] = (int)(Math.random() * 10);
-            System.out.print(array[i] + " ");
         }
-        System.out.println();
+        printArrayFirst(array);
         return array;
     }
 
-    public static int[][] arraySecond(){
+    public static int[][] arraySecond() throws Exception{
         int a,b;
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите размерность массива по вертикали");
@@ -33,14 +45,28 @@ public class lab1 {
 
         int[][] array = new int[a][b];
 
-        for (int i = 0; i < a; i++) {
-            for (int j = 0; j < b; j++) {
-                array[i][j] = (int)(Math.random() * 10);
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = (int)((Math.random() * 20) - 10);
+            }
+        }
+        printArraySecond(array);
+        return array;
+    }
+
+    public static void printArrayFirst(int[] array){
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+    }
+
+    public static void printArraySecond(int[][] array){
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
                 System.out.print(array[i][j] + " ");
             }
             System.out.println();
         }
-        return array;
     }
 
     public static void zad1(int[] array){
@@ -90,8 +116,6 @@ public class lab1 {
          */
         int zam = 0;
         int mid = array[0].length / 2;
-        System.out.println(array.length);
-        System.out.println(mid);
 
         if (array[0].length % 2 == 0){
             for (int i = 0; i < array.length; i++) {
@@ -99,10 +123,31 @@ public class lab1 {
                 array[i][mid - 1] = array[i][mid];
                 array[i][mid] = zam;
             }
+        }else {
+            for (int i = 0; i < array.length; i++) {
+            zam = array[i][mid];
+            array[i][mid] = array[i][0];
+            array[i][0] = zam;
+            }
         }
+        printArraySecond(array);
 
 
 
+    }
 
+    public static void zad6(int[][] array){
+        /*7.Для каждого столбца подсчитать сумму четных положительных
+            элементов и записать данные в новый массив.
+         */
+        int[] sum = new int[array[0].length];
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (array[i][j] > 0){
+                    sum[j] = sum[j] + array[i][j];
+                }
+            }
+        }
+        printArrayFirst(sum);
     }
 }
