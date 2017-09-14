@@ -1,25 +1,33 @@
+import java.awt.*;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.Scanner;
+import java.util.*;
+import java.util.List;
+
+import static javafx.scene.input.KeyCode.R;
 
 public class lab1 {
     public static void main(String args[ ])
     {
         try {
             //zad1(arrayFirst());
-
             //zad3(arrayFirst());
         }catch (Exception e){
             System.out.println("Необходимо вводить только числа больше 0. Попробуйте еще раз.");
         }
-
         try {
             //zad2(arraySecond());
-
             //zad5(arraySecond());
-            zad6(arraySecond());
-        } catch (Exception e) {
+            //zad6(arraySecond());
+        }
+        catch (Exception e) {
             System.out.println("Необходимо вводить только числа больше 0. Попробуйте еще раз.");
+        }
+        try {
+//            zad7();
+            zad8();
+        }catch (Exception e){
+            System.out.println("Обработка ошибки");
         }
 
     }
@@ -149,5 +157,54 @@ public class lab1 {
             }
         }
         printArrayFirst(sum);
+    }
+
+    public static void zad7(){
+        System.out.println("Введите строку:");
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        System.out.println("Введиде искомый символ:");
+        String symbol = sc.nextLine();
+
+        str = str.replaceAll(symbol, symbol.concat(symbol));
+        System.out.println(str);
+
+    }
+
+    public static void zad8() {
+//        7.Удалить из сообщения все повторяющиеся слова (без учета регистра).
+        System.out.println("Введите строку:");
+        Scanner sc = new Scanner(System.in);
+       // String str = sc.nextLine();
+
+        String str = "разделить по строку по разделителю";
+        String delimeter = " "; // Разделитель
+        String[] subStr = str.split(delimeter);
+
+        ArrayList<String> stringList = new ArrayList<String>();
+
+        for (int i = 0; i < subStr.length; i++) {
+            stringList.add(subStr[i]);
+        }
+
+        int[] countToSrray = new int[stringList.size()];
+
+        for (int i = 0; i < countToSrray.length; i++) {
+            int count = Collections.frequency(stringList, subStr[i]);
+            countToSrray[i] = count;
+        }
+
+        for (int i = countToSrray.length - 1; i > -1; i--) {
+            if (countToSrray[i] > 1) {
+                stringList.remove(i);
+            }
+        }
+
+        for (String stringListPrint : stringList) {
+            str = str.concat(stringListPrint);
+            System.out.println(stringListPrint);
+        }
+        System.out.println(str);
+
     }
 }
